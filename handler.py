@@ -17,7 +17,7 @@ def init():
 @app.before_first_request
 def init_():
 	from langs import lang
-	from bot import sendAdmin
+	from TelegramBOT import sendAdmin
 	print("\033[31m  {}\n  {} ".format(lang('int', 'main', sudo='True'), lang('id_text', 'main', sudo='True').format(config.BOT['id'])))
 	sendAdmin(text="<b>{}</b>".format(lang('int', 'main', sudo='True')), parse_mode="HTML")
 @app.before_request
@@ -27,7 +27,7 @@ def handler_():
 			init()
 	if flask.request.method == 'POST':
 		if flask.request.path == "/webhook/telegram":
-			from bot import on_msg_receive, time_atual, forward_to_msg, callback_query, service_to_message
+			from TelegramBOT import on_msg_receive, time_atual, forward_to_msg, callback_query, service_to_message
 			msg = flask.request.get_json(silent=True, force=True)
 			if config.Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
