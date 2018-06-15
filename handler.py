@@ -31,7 +31,6 @@ def handler_():
 			msg = flask.request.get_json(silent=True, force=True)
 			if config.Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
-			if time_atual(msg['message']['date']) > 10: return flask.Response(status=200)
 			if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):
 				if ('callback_query' in msg):
 					callback_query(msg['callback_query'])

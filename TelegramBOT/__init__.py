@@ -87,6 +87,7 @@ def on_msg_receive(msg):
 	msg_from_id = msg['from']['id']
 	if config.Sys['viewer_shell'] == True:
 		viewer(msg)
+	if time_atual(msg['date']) > 10: return flask.Response(status=200)
 	for aPlugin in plugins:
 		for patterns in aPlugin['patterns']:
 			if re.search(patterns, msg['text'], re.IGNORECASE):
