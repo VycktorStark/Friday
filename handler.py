@@ -19,11 +19,22 @@ def handler_():
 			                  params={"url": "{}/webhook/telegram".format(Sys['host']), 'max_connections': 1,
 											 "allowed_updates": json.dumps(["message", "edited_message", "callback_query"])})
 			return (lang('started_webhook', 'main', sudo='True'),200)
-			
+		elif request.path =="/webhookfacebook":
+					if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+							if not request.args.get("hub.verify_token") == Sys['senha']:
+									return (lang('nottokenFB', 'main', sudo=True), 403)
+							return request.args["hub.challenge"], 200
+					return (lang('OktokenFB', 'main', sudo=True), 200)
+
 	elif request.method == 'POST':
-		if request.path == "/webhook/telegram":
+		msg = request.get_json(silent=True, force=True)
+		if request.path == "/webhookfacebook":
+			from FacebookBOT import FbBOT
+			data = msg['entry'][0]
+			if data.get('messaging') and data['messaging'][0].get('message'):
+				FbBOT(data)
+		elif request.path == "/webhook/telegram":
 			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, msg_media_, msg_receive_
-			msg = request.get_json(silent=True, force=True)
 			if Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
 			if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):

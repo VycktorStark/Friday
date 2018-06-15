@@ -22,5 +22,7 @@ Sys = {
   'maintenance': False,
   'suporte': 438131290,
   'logs': 438131290,
-  'host': 'https://www.exemple.com'
+  'host': 'https://www.exemple.com',
+  'senha': '@BOT192837645',
+  'tokenFBOT': ''
 }

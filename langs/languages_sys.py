@@ -35,11 +35,13 @@ sudo_string_lang = {
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
     'id_text': '\033[37mID: \033[31m{}\033[37m',
-    "viewer": '''\033[37m\033[36m{user} \033[37m(\033[31m{user_id})\033[37m send Message
+    "viewer": '''\033[37m\033[36m{user} \033[37m(\033[31m{user_id}\033[37m) {SendType}
 - Details
 * Sent from a {chat_name} (ID: \033[31m{chat_id}\033[37m)
 * Message send: \033[31m{text}\033[37m''',
 		'cmd_detected':'\033[37m* cmd executed: \033[31m{}\033[37m',
-		'started_webhook': '<li>Ok<h1>Bot started </h1></li>'
+		'started_webhook': '<li>Ok<h1>Bot started </h1></li>',
+		'nottokenFB': 'Missing check token matching',
+		'OktokenFB': "Check token match - OK"
 	}]
 }
