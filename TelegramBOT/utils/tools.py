@@ -33,12 +33,12 @@ def time_atual(msg_data):
 	
   return segundos
 def bash(self, cmd):
-  if self == '/git':
+  if 'git' in self:
     cmd = "git " + cmd
   comando = re.sub(self, "", cmd)
   comando = re.sub('—', '--', comando)
   shell = subprocess.check_output(comando, shell=True)
   if len(shell) == 0:
-    shell = lang('Shell_Not', 'tools')
+    shell = lang('Shell_Not', 'tools',sudo='True')
   return shell.decode('utf8')
 
