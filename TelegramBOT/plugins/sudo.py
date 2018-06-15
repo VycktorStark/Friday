@@ -3,7 +3,7 @@
 def adminPlugin(msg, cmd, ln):
 	from TelegramBOT import sendAdmin, config, loadplugins
 	global maintenance
-	if cmd[1] == 'reboot':
+	if cmd[1] == 'update':
 		sendAdmin(text="Done")
 		return loadplugins()
 	
@@ -18,9 +18,9 @@ def adminPlugin(msg, cmd, ln):
 		return config.Sys['maintenance']
 plugin = {
 	'patterns': [
-		"^/sudo (reboot)$",
-		"^/sudo (manut)$",
-		"^/sudo (notmanut)$",
+		"^/(sudo) (update)$",
+		"^/(sudo) (manut)$",
+		"^/(sudo) (notmanut)$",
 	],
 	'function': adminPlugin,
 	'name': "Admin",
