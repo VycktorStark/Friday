@@ -1,13 +1,13 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
-from TelegramBOT import sendAdmin, config, loadplugins, bash
-def adminPlugin(msg, cmd, ln):
+from TelegramBOT import sendAdmin, config, plugins_, bash_
+def Function(msg, cmd, ln):
 	print(len(cmd))
 	global maintenance
 	if 'sudo' in cmd[0]:
 			if cmd[1] == 'update':
 				sendAdmin(text="Done")
-				return loadplugins()
+				return plugins_()
 
 			elif cmd[1] == 'manut':
 				config.Sys['maintenance'] = True
@@ -20,19 +20,19 @@ def adminPlugin(msg, cmd, ln):
 				return config.Sys['maintenance']
 	elif 'shell' in cmd[0]:
 		print('aqui')
-		sendAdmin(text=bash(cmd[0], msg['text'].replace(cmd[0],'')))
+		sendAdmin(text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
 	elif 'git' in cmd[0]:
-		sendAdmin(text=bash(cmd[0], msg['text'].replace(cmd[0],'')))
-	
+		sendAdmin(text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
+
 plugin = {
 	'patterns': [
-		"^/(sudo) (update)$",
-		"^/(sudo) (manut)$",
-		"^/(sudo) (notmanut)$",
-		"^/(shell) (.+)$",
-		"^/(git) (.+)$"
+		"^([/!#]sudo) (update)$",
+		"^[/!#](sudo) (manut)$",
+		"^[/!#](sudo) (notmanut)$",
+		"^[/!#](shell) (.+)$",
+		"^[/!#](git) (.+)$"
 	],
-	'function': adminPlugin,
+	'function': Function,
 	'name': "Admin",
 	'sudo': True,
 	}

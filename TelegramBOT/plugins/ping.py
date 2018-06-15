@@ -1,11 +1,11 @@
-def Ping(msg, cmd, ln):
+def Function(msg, cmd, ln):
 	return 'pong'
 
 plugin = {
 	'patterns': [
-		"^/(ping)$"
+		"^[/!#](ping)$"
 	],
-	'function': Ping,
+	'function': Function,
 	'name': "Ping",
 	'sudo': False,
 	}

@@ -9,12 +9,11 @@ from .utils.tools import *
 __all__ += utils.tools.__all__
 from .methods.methods import *
 __all__ += methods.methods.__all__
-__all__ += ['loadplugins', 'plugins', 'plugins_name']
+__all__ += ['loadplugins', 'plugins']
 curPath = dirname(realpath(__file__))
 def loadplugins():
-	global plugins, plugins_name
+	global plugins
 	plugins = []
-	plugins_name = []
 	pluginFiles = [curPath + "/plugins/" + f for f in listdir(curPath + "/plugins") if re.search('^.+\.py$', f)]
 	for file in pluginFiles:
 		values = {}
@@ -23,8 +22,6 @@ def loadplugins():
 			exec(code, values)
 		plugin = values['plugin']
 		plugins.append(plugin)
-		plugins_name.append(plugin['name'])
-	plugins_name.remove('Admin')
 def rethink_reply(msg):
   msg['reply'] = msg['reply_to_message']
   if msg['reply']['caption']:

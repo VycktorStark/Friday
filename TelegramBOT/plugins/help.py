@@ -1,5 +1,5 @@
 from TelegramBOT import *
-def helpFunction(msg, cmd, ln):
+def Function(msg, cmd, ln):
 	if len(cmd) < 2:
 		return lang('help', ln)[0]['list_cmd'].format(plugi())
 	else:
@@ -9,24 +9,25 @@ def helpFunction(msg, cmd, ln):
 				return msg_replace(msg, lang('Error_request', ln))
 def plugi(cmd_=None):
 	x = '\n'
-	lista = plugins_name
+	lista = plugins.copy()
 	for num,plug in enumerate(lista):
-		if cmd_ != None:
-			if cmd_.lower() == plug.lower() or str(cmd_) ==str(num):
-				x = plug.lower()
-		else:
-			x = x+"{} {}\n".format(num,plug)
+		if not plug['name'] == "Admin":
+			if cmd_ != None:
+				if cmd_.lower() == plug['name'].lower() or str(cmd_) ==str(num):
+					x = plug['name'].lower()
+			else:
+				x = x+"{} {}\n".format(num,lista[num]['name'])
 	return x
 plugin = {
 	'patterns': [
-		"^/(help)$",
-		"^/(help) (.+)$",
-		"^/(ayudar)$",
-		"^/(ayudar) (.+)$",
-		"^/(ajuda)$",
-		"^/(ajuda) (.+)$"
+		"^[/!#](help)$",
+		"^[/!#](help) (.+)$",
+		"^[/!#](ayudar)$",
+		"^[/!#](ayudar) (.+)$",
+		"^[/!#](ajuda)$",
+		"^[/!#](ajuda) (.+)$"
   ],
-	'function': helpFunction,
+	'function': Function,
 	'name': "Help",
 	'sudo': False, 
 	}
