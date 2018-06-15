@@ -32,12 +32,13 @@ sudo_string_lang = {
 	'main':[{
 		"plugin_err":'Failed plugin: {}',
 		"sudo_not":'Hey, you can not tell me.!',
-    'int': 'Friday was started!',
+    'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
     'id_text': '\033[37mID: \033[31m{}\033[37m',
     "send": '\033[37mSent from a {} (\033[37mID: \033[31m{}\033[37m)',
     'infor_msg': '\nInformation: ',
 		'cmd_detected':'\033[37mcmd detected: \033[31m{}\033[37m',
     'msg': '\nMessage: ',
+		'started_webhook': '<li>Ok<h1>Bot started </h1></li>'
 	}]
 }
