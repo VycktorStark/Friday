@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 __all__ = ['time_atual', 'bash', 'regex', 'msg_replace']
-from bot import *
+from TelegramBOT import *
 def msg_replace(msg, text):
 	user_ = msg['from']
 	chat_ = msg['chat'] 

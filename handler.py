@@ -2,7 +2,7 @@
 # encoding=utf8
 import flask, config, os, requests, json
 app = flask.Flask(__name__)		
-from bot import loadplugins
+from TelegramBOT import loadplugins
 def init():
 	#https://api.telegram.org/bot<TOKEN>/setwebhook?url=https://www.example.com/webhook/telegram&max_connections=1&allowed_updates=["message", "edited_message", "callback_query", "inline_query", "chosen_inline_result"]
 	try:

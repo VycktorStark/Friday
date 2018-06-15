@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 def adminPlugin(msg, cmd, ln):
-	from bot import sendAdmin, config, loadplugins
+	from TelegramBOT import sendAdmin, config, loadplugins
 	global maintenance
 	if cmd[1] == 'reboot':
 		sendAdmin(text="Done")

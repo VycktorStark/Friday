@@ -1,4 +1,4 @@
-from bot import *
+from TelegramBOT import *
 def helpFunction(msg, cmd, ln):
 	if len(cmd) < 2:
 		return lang('help', ln)[0]['list_cmd'].format(plugi())

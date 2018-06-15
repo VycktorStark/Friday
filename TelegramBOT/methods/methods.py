@@ -3,7 +3,7 @@ __all__ = ['sendTelegram', 'sendMessage','forwardMessage',
 					 'editMessageText','editMessageCaption',
 					 'editMessageReplyMarkup', 'answerCallbackQuery',
 					'sendAdmin', 'sendInline', 'sendVoice', 'sendAudio']
-from bot import *
+from TelegramBOT import *
 def sendTelegram(url=None, query=None, file_=None): #function to answer the telegram request
 	RESPOSTA = None
 	try:
