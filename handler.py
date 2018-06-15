@@ -22,31 +22,31 @@ def handler_():
 			
 	elif request.method == 'POST':
 		if request.path == "/webhook/telegram":
-			from TelegramBOT import on_msg_receive, forward_to_msg, callback_query, service_to_message
+			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, msg_receive_
 			msg = request.get_json(silent=True, force=True)
 			if Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
 			if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):
 				if ('callback_query' in msg):
-					callback_query(msg['callback_query'])
+					callback_query_(msg['callback_query'])
 				elif ('edited_message' in msg):
 					msg['message'] = msg['edited_message']
 					msg['edited_message'] = None
 				elif ('message' in msg):
 					if ('new_chat_member' in msg['message']) or ('left_chat_member' in msg['message']) or ('group_chat_created' in msg['message']):
-						service_to_message(msg['message'])
+						status_service_(msg['message'])
 					elif ('forward_from' in msg['message']):
-						forward_to_msg(msg['message'])
+						forward_msg_(msg['message'])
 					elif ('reply_to_message' in msg['message']):
-						rethink_reply(msg['message'])
+						reply_caption_(msg['message'])
 					else:
-						on_msg_receive(msg['message'])
+						msg_receive_(msg['message'])
 
 @app.errorhandler(404)
 def server_error(e):
 	return flask.Response(status=200)
 
-from TelegramBOT import loadplugins
+from TelegramBOT import plugins_
 if __name__ == '__main__':
-	loadplugins()
+	plugins_()
 	app.run(debug=config.Sys['debug_main'], port=int(os.getenv('PORT', 3000)), host='0.0.0.0')

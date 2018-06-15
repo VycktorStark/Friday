@@ -35,10 +35,11 @@ sudo_string_lang = {
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
     'id_text': '\033[37mID: \033[31m{}\033[37m',
-    "send": '\033[37mSent from a {} (\033[37mID: \033[31m{}\033[37m)',
-    'infor_msg': '\nInformation: ',
-		'cmd_detected':'\033[37mcmd detected: \033[31m{}\033[37m',
-    'msg': '\nMessage: ',
+    "viewer": '''\033[37m\033[36m{user} \033[37m(\033[31m{user_id})\033[37m send Message
+- Details
+* Sent from a {chat_name} (ID: \033[31m{chat_id}\033[37m)
+* Message send: \033[31m{text}\033[37m''',
+		'cmd_detected':'\033[37m* cmd executed: \033[31m{}\033[37m',
 		'started_webhook': '<li>Ok<h1>Bot started </h1></li>'
 	}]
 }
