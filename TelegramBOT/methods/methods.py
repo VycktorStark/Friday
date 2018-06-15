@@ -1,19 +1,29 @@
 #-*- coding: utf-8 -*-
-__all__ = ['sendTelegram', 'sendMessage','forwardMessage', 
+__all__ = ['sendRequest', 'sendRequestTelegram', 'sendMessage','forwardMessage', 
 					 'editMessageText','editMessageCaption',
 					 'editMessageReplyMarkup', 'answerCallbackQuery',
 					'sendAdmin', 'sendInline', 'sendVoice', 'sendAudio']
-from TelegramBOT import requests, json, config, flask
-Token = config.BOT['token']
-API = config.BOT['API']
-def sendTelegram(url=None, query=None, file_=None):
-		global RESPOSTA
+from TelegramBOT import requests, json, config, flask, log_
+
+def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None, setime=None, post=False):
 		try:
-				data = requests.get(url=url, params=query, files=file_)
+				if post==True:
+							data = requests.post(url, params=params, headers=headers, auth=auth, files=files)
+				else:
+							data = requests.get(url, params=params, headers=headers, auth=auth, files=files)
 		except Exception as error:
 				print(error)
-				return False
 		if data.status_code == 200:
+			return 200, data
+		else:
+				log_('Error in request! {}\n{}\n\n{}'.format(url, params, data.text))
+		return 400, data
+
+def sendRequestTelegram(methods=None, query=None, file_=None):
+		global RESPOSTA
+		url = config.BOT['API'].format(token=config.BOT['token'] ,method=methods)
+		code, data = sendRequest(url=url, params=query, files=file_)
+		if code == 200:
 				RESPOSTA = 'Done'
 		else:
 				code_err_tr(data)
@@ -37,35 +47,35 @@ def code_err_tr(dat):
 		return False
 
 def sendMessage(chat_id=None, text=None, parse_mode=None,  disable_web_page_preview=None, disable_notification=None,  reply_to_message_id=None,  reply_markup=None, inline_keyboard=None):	
-		return sendTelegram(API.format(token=Token ,method='sendMessage'), locals())
+		return sendRequestTelegram('sendMessage', locals())
 
 def forwardMessage(chat_id=None, from_chat_id=None, disable_notification=None,message_id=None):
-		return sendTelegram(API.format(token=Token ,method='forwardMessage'), locals())
+		return sendRequestTelegram('forwardMessage', locals())
 
 def editMessageText(chat_id=None, message_id=None,  inline_message_id=None, text=None, parse_mode=None, disable_web_page_preview=None, reply_markup=None, inline_keyboard=None):
-		return sendTelegram(API.format(token=Token ,method='editMessageText'), locals())
+		return sendRequestTelegram('editMessageText', locals())
 
 def editMessageCaption(chat_id=None, message_id=None, inline_message_id=None, caption=None, reply_markup=None, inline_keyboard=None):
-		return sendTelegram(API.format(token=Token ,method='editMessageCaption'), locals())
+		return sendRequestTelegram('editMessageCaption', locals())
 
 def editMessageReplyMarkup(chat_id=None, message_id=None, inline_message_id=None, reply_markup=None, inline_keyboard=None):	
-		return sendTelegram(API.format(token=Token ,method='editMessageReplyMarkup'), locals())
+		return sendRequestTelegram('editMessageReplyMarkup', locals())
 
 def answerCallbackQuery(callback_query_id=None, text=None, show_alert=None,cache_time=None):	
-		return sendTelegram(API.format(token=Token ,method='answercallbackquery'), locals())
+		return sendRequestTelegram('answercallbackquery', locals())
 
 def sendAdmin(chat_id=None,text=None, parse_mode=None, disable_web_page_preview=None,disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
      if (chat_id == None) or (chat_id == 'suporte'): chat_id = config.Sys['suporte']
      else: chat_id = config.Sys['suporte'] or 438131290
-     return sendTelegram(API.format(token=Token ,method='sendMessage'), locals())
+     return sendRequestTelegram('sendMessage', locals())
 def sendAudio(chat_id=None, audio=None, duration=None, disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
 		audio=audio
-		return sendTelegram(API.format(token=Token ,method='sendAudio'), organize_argument(locals(), item=['audio']), file_=audio)
+		return sendRequestTelegram('sendAudio', organize_argument(locals(), item=['audio']), file_=audio)
 
 def sendVoice(chat_id=None, voice=None, duration=None, disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
 		voice=voice
-		return sendTelegram(API.format(token=Token ,method='sendVoice'), organize_argument(locals(), item=['voice']), file_=voice)
+		return sendRequestTelegram('sendVoice', organize_argument(locals(), item=['voice']), file_=voice)
 
 def sendInline(inline_query_id=None, results=None, cache_time=None, is_personal=None, next_offset=None, switch_pm_text=None, switch_pm_parameter=None):
-		return sendTelegram(API.format(token=Token ,method='answerInlineQuery'), locals())
+		return sendRequestTelegram('answerInlineQuery', locals())
 
