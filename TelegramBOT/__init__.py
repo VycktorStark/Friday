@@ -69,6 +69,51 @@ def forward_msg_(msg):
 		else:
 				msg['text'] = '###forward'
 		return msg_receive_(msg)
+	
+def msg_media_(msg):
+		if 'photo' in msg: msg['text'] = "###Photo"
+		elif 'sticker' in msg: msg['text'] = "###Sticker"
+		elif 'voice' in msg: msg['text'] = "###Voice"
+		elif 'audio' in msg: msg['text'] = "###Audio"
+		elif 'video' in msg: msg['text'] = "###Vídeo"
+		elif 'contact' in msg: msg['text'] = "###contact"
+		elif msg['entities'][0]['type'] == "url": msg['url'] = "###url"
+		elif 'document' in msg and msg['document']['mime_type']:
+				document = msg['document']['mime_type']
+				if document == "video/mp4":
+						msg['text'] = "###gif."
+				elif document == "application/x-bittorrent":
+						msg['text'] = "###pdf_file"    
+				elif document == "application/vnd.android.package-archive":
+						msg['text'] = "###app"    
+				elif document == "application/x-rar":
+						msg['text'] = "###rar_file"    
+				elif document == "application/x-zip":
+						msg['text'] = "###zip_file"    
+				elif document == "text/x-python":
+						msg['text'] = "###script_in_python"    
+				elif document == "text/plain":
+						msg['text'] = "###text file"    
+				elif document == "application/x-shellscript":
+						msg['text'] = "###script_in_shell"    
+				elif document == "text/x-lua":
+						msg['text'] = "###script_in_lua"    
+				elif document == "text/html":
+						msg['text'] = "###script_in_HTML"    
+				elif document == "application/json":
+						msg['text'] = "###script_in_JSON"    
+				elif document == "application/javascript":
+						msg['text'] = "###script_in_JavaScript"    
+				elif document == "application/octet-stream":
+						msg['text'] = "###script_in_octet-stream"    
+				elif document == "text/markdown":
+						msg['text'] = "###script_in_Markdown"    
+				elif document == "application/x-yaml":
+						msg['text'] = "###script_in_yaml."
+				else: 
+					msg['text'] = "file"
+		elif msg['entities'][0]['type'] == "url": msg['url'] = "###url"
+		return msg_receive_(msg)
 
 
 def msg_receive_(msg):	

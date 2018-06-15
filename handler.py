@@ -22,7 +22,7 @@ def handler_():
 			
 	elif request.method == 'POST':
 		if request.path == "/webhook/telegram":
-			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, msg_receive_
+			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, msg_media_, msg_receive_
 			msg = request.get_json(silent=True, force=True)
 			if Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
@@ -33,14 +33,17 @@ def handler_():
 					msg['message'] = msg['edited_message']
 					msg['edited_message'] = None
 				elif ('message' in msg):
-					if ('new_chat_member' in msg['message']) or ('left_chat_member' in msg['message']) or ('group_chat_created' in msg['message']):
-						status_service_(msg['message'])
-					elif ('forward_from' in msg['message']):
-						forward_msg_(msg['message'])
-					elif ('reply_to_message' in msg['message']):
-						reply_caption_(msg['message'])
+					msg_ = msg['message']
+					if ('new_chat_member' in msg_) or ('left_chat_member' in msg_) or ('group_chat_created' in msg_):
+						status_service_(msg_)
+					elif ('forward_from' in msg_):
+						forward_msg_(msg_)
+					elif ('reply_to_message' in msg_):
+						reply_caption_(msg_)
+					elif 'photo'  in msg_ or 'video'  in msg_ or 'document'  in msg_ or 'voice'  in msg_ or 'audio'  in msg_ or 'sticker'  in msg_ or 'entities'  in msg_:
+						msg_media_(msg_)
 					else:
-						msg_receive_(msg['message'])
+						msg_receive_(msg_)
 
 @app.errorhandler(404)
 def server_error(e):
