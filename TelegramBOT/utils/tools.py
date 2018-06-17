@@ -12,6 +12,8 @@ def msg_replace_(msg, text):
 				text = text.replace("{user}", nome_user)
 		if '{user_id}' in text:
 				text = text.replace("{user_id}", str(user_['id']))
+		if '{username}' in text:
+				text = text.replace("{username}", user_['username'])
 		if '{chat_id}' in text:
 				text = text.replace('{chat_id}', str(chat_['id']))
 		if '{chat_name}' in text:
@@ -22,7 +24,7 @@ def msg_replace_(msg, text):
 				text = text.replace("{SendType}", SendType(msg))
 		return text
 def SendType(msg):
-		global texto
+		texto = msg
 		if 'photo' in msg: texto = "sent a foto."
 		elif 'sticker' in msg: texto = "sent a Sticker."
 		elif 'voice' in msg: texto = "sent a voz."
@@ -66,6 +68,8 @@ def SendType(msg):
 				texto = 'sent a url'
 			elif msg['entities'][0]['type'] == "bot_command":
 				texto = 'sent a command'
+			elif msg['entities'][0]['type'] == "mention":
+				texto = 'mentioned someone'
 		elif 'text' in msg:
 			texto = 'sent a message'
 		return texto
