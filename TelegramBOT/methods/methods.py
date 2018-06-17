@@ -67,7 +67,9 @@ def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None
 		if data.status_code == 200:
 			return 200, data
 		else:
-				log_('Error in request! {}\n{}\n\n{}'.format(url, params, data.text))
+				err = 'Error in request! {}\n{}\n\n{}'.format(url, params, data.text)
+				log_(err)
+				sendAdmin(text=err)
 		return 400, data
 
 def sendRequestTelegram(methods=None, query=None, file_=None):
@@ -92,9 +94,7 @@ def code_err_tr(dat):
 			try:
 				sendAdmin(text=lang("ONE_FIELD", 'bad_request', sudo=True).format(lang(status_code, 'bad_request', sudo=True)), parse_mode='HTML')
 			except Exception as error:
-				print(error)
-		else:
-			sendAdmin(text=lang("error_occurred", 'bad_request', sudo=True).format(error_code, data['description']),parse_mode='HTML')
+				sendAdmin(text=lang("error_occurred", 'bad_request', sudo=True).format(error_code, data['description']),parse_mode='HTML')
 		return False
 
 def getUpdates(offset=None, limit=None, timeout=None, allowed_updates=None):

@@ -30,7 +30,7 @@ sudo_string_lang = {
 	}],
 	########## main.py ##########
 	'main':[{
-		"plugin_err":'Failed plugin: {}',
+		"plugin_err":'Failed to execute: {}\nDetail: {}',
 		"migrate":'\033[37m* The chat is being migrated para \033[36msupergrupo\033[37',
 		"sudo_not":'Hey, you can not tell me.!',
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',

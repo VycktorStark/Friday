@@ -25,27 +25,27 @@ def plugins_():
 		
 def reply_caption_(msg):
 		msg['reply'] = msg['reply_to_message']
-		if msg['reply']['caption']:
+		if ("caption" in msg['reply']):
 			msg['reply']['text'] = msg['reply']['caption']
 		return msg_receive_(msg)
 
 def status_service_(msg):
-		msg['service'] = true
-		if msg['new_chat_member']:
+		msg['service'] = True
+		if ("new_chat_member" in msg):
 				if str(msg['new_chat_member']['id']) == str(config.BOT['id']):
 						msg['text'] = '###botadded'
 				else:
 						msg['text'] = '###added'
 				msg['adder'] = msg['from']
 				msg['added'] = msg['new_chat_member']
-		elif msg['left_chat_member']:
+		if ("left_chat_member" in msg):
 				if str(msg['left_chat_member']['id']) == str(config.BOT['id']):
 						msg['text'] = '###botremoved'
 				else:
 						msg['text'] = '###removed'
 				msg['remover'] = msg['from']
-				msg['removed'] = msg['new_chat_member']
-		elif msg['group_chat_created']:
+				msg['removed'] = msg['left_chat_member']
+		if ("group_chat_created" in msg):
 				msg['chat_created'] = true
 				msg['adder'] = msg['from']
 				msg['text'] = '###botadded'
@@ -64,7 +64,7 @@ def callback_query_(msg):
 		return msg_receive_(msg)
 
 def forward_msg_(msg):
-		if msg['text']:
+		if 'text' in msg:
 				msg['text'] = '###forward: {}'.format(msg['text'])
 		else:
 				msg['text'] = '###forward'
@@ -115,12 +115,10 @@ def msg_media_(msg):
 		elif msg['entities'][0]['type'] == "url": msg['url'] = "###url"
 		return msg_receive_(msg)
 
-
 def msg_receive_(msg):	
 		msg_from_id = msg['from']['id']
 		chat_id = msg['chat']['id']
-		if config.Sys['viewer_shell'] == True:
-				viewer_(msg)
+		if config.Sys['viewer_shell'] == True: viewer_(msg)
 		if time_atual_(msg['date']) > 10: return flask.Response(status=200)
 		for aPlugin in plugins:
 				for patterns in aPlugin['patterns']:
@@ -135,7 +133,9 @@ def msg_receive_(msg):
 										else:
 											resp = aPlugin['function'](msg, msg['text'].split(), msg['from']['language_code'][:2])
 									except Exception as err:
-											print(lang('plugin_err', 'main', sudo='True').format(err))
+											err_ = lang('plugin_err', 'main', sudo='True').format(msg['text'], err)
+											sendAdmin(text=err_)
+											print(err_)
 									else:
 											if resp != None and resp != False:
 												sendMessage(chat_id=chat_id, text=resp, parse_mode="HTML")
