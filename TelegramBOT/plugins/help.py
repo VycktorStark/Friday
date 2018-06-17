@@ -1,6 +1,6 @@
 from TelegramBOT import *
 def Function(msg, cmd, ln):
-	if len(cmd) < 2:
+	if (len(cmd) < 2):
 		return lang('help', ln)[0]['list_cmd'].format(plugi())
 	else:
 			try:
@@ -8,10 +8,12 @@ def Function(msg, cmd, ln):
 			except Exception as error:
 				return msg_replace(msg, lang('Error_request', ln))
 def plugi(cmd_=None):
+	lista = []
+	for aPlug in plugins:
+		if not aPlug["sudo"]== True:
+				lista.append(aPlug)
 	x = '\n'
-	lista = plugins.copy()
 	for num,plug in enumerate(lista):
-		if not plug['name'] == "Admin":
 			if cmd_ != None:
 				if cmd_.lower() == plug['name'].lower() or str(cmd_) ==str(num):
 					x = plug['name'].lower()

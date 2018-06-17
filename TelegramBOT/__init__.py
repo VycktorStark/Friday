@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from os import listdir
 from os.path import isfile, join, realpath, dirname
-from langs import *
+from langs import lang
 import re, os , sys, time, subprocess, config, requests, json, flask, datetime
 __all__ = ['re', 'os', 'sys','subprocess', 'time', 'lang', 'config', 'requests', 'json', 'flask', 'datetime']
 from .utils.tools import *
@@ -70,58 +70,58 @@ def callback_query_(msg):
 		return msg_receive_(msg)
 
 def forward_msg_(msg):
-		if msg['forward_from']["is_bot"] == True:
+		if (msg['forward_from']["is_bot"] == True):
 				msg['action'] = '###forwardbot'
 		msg['action'] = '###forward'
 		return msg_receive_(msg)
 	
 def msg_media_(msg):
-		if 'photo' in msg: msg['action'] = "###Photo"
-		elif 'sticker' in msg: msg['action'] = "###Sticker"
-		elif 'voice' in msg: msg['action'] = "###Voice"
-		elif 'audio' in msg: msg['action'] = "###Audio"
-		elif 'video' in msg: msg['action'] = "###Video"
-		elif 'contact' in msg: msg['action'] = "###contact"
-		elif 'document' in msg and msg['document']['mime_type']:
+		if ('photo' in msg): msg['action'] = "###Photo"
+		elif ('sticker' in msg): msg['action'] = "###Sticker"
+		elif ('voice' in msg): msg['action'] = "###Voice"
+		elif ('audio' in msg): msg['action'] = "###Audio"
+		elif ('video' in msg): msg['action'] = "###Video"
+		elif ('contact' in msg): msg['action'] = "###contact"
+		elif ('document' in msg and msg['document']['mime_type']):
 				document = msg['document']['mime_type']
-				if document == "video/mp4":
+				if (document == "video/mp4"):
 						msg['action'] = "###gif"
-				elif document == "application/x-bittorrent":
+				elif (document == "application/x-bittorrent"):
 						msg['action'] = "###pdf_file"    
-				elif document == "application/vnd.android.package-archive":
+				elif (document == "application/vnd.android.package-archive"):
 						msg['action'] = "###app"    
-				elif document == "application/x-rar":
+				elif (document == "application/x-rar"):
 						msg['action'] = "###rar_file"    
-				elif document == "application/x-zip":
+				elif (document == "application/x-zip"):
 						msg['action'] = "###zip_file"    
-				elif document == "text/x-python":
+				elif (document == "text/x-python"):
 						msg['action'] = "###script_in_python"    
-				elif document == "text/plain":
+				elif (document == "text/plain"):
 						msg['action'] = "###text_file"    
-				elif document == "application/x-shellscript":
+				elif (document == "application/x-shellscript"):
 						msg['action'] = "###script_in_shell"    
-				elif document == "text/x-lua":
+				elif (document == "text/x-lua"):
 						msg['action'] = "###script_in_lua"    
-				elif document == "text/html":
+				elif (document == "text/html"):
 						msg['action'] = "###script_in_HTML"    
-				elif document == "application/json":
+				elif (document == "application/json"):
 						msg['action'] = "###script_in_JSON"    
-				elif document == "application/javascript":
+				elif (document == "application/javascript"):
 						msg['action'] = "###script_in_JavaScript"    
-				elif document == "application/octet-stream":
+				elif (document == "application/octet-stream"):
 						msg['action'] = "###script_in_octet-stream"    
-				elif document == "text/markdown":
+				elif (document == "text/markdown"):
 						msg['action'] = "###script_in_Markdown"    
-				elif document == "application/x-yaml":
+				elif (document == "application/x-yaml"):
 						msg['action'] = "###script_in_yaml."
 				else: 
 					msg['action'] = "###file"
-		elif 'entities' in msg:
-			if msg['entities'][0]['type'] == "url":
+		elif ('entities' in msg):
+			if (msg['entities'][0]['type'] == "url"):
 					msg['action'] = '###url'
-			elif msg['entities'][0]['type'] == "mention":
+			elif (msg['entities'][0]['type'] == "mention"):
 					msg['action'] = '###mention'
-			elif msg['entities'][0]['type'] == "bot_command":
+			elif (msg['entities'][0]['type'] == "bot_command"):
 					msg['action'] = '###bot_command'
 		return msg_receive_(msg)
 

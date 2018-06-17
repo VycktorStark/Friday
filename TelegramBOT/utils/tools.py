@@ -5,26 +5,26 @@ from TelegramBOT import sys, lang, re, subprocess, time, json
 def msg_replace_(msg, text):
 		user_ = msg['from']
 		chat_ = msg['chat'] 
-		if "{user}" in text:
+		if ("{user}" in text):
 				nome_user = user_['first_name'].encode("ascii", "ignore").decode("ascii")
-				if 'last_name' in user_: 
+				if ('last_name' in user_): 
 						nome_user = "{} {}".format(nome_user, user_['last_name']).encode("ascii", "ignore").decode("ascii")
 				text = text.replace("{user}", nome_user)
-		if '{user_id}' in text:
+		if ('{user_id}' in text):
 				text = text.replace("{user_id}", str(user_['id']))
-		if '{username}' in text:
+		if ('{username}' in text):
 				text = text.replace("{username}", user_['username'])
-		if '{chat_id}' in text:
+		if ('{chat_id}' in text):
 				text = text.replace('{chat_id}', str(chat_['id']))
-		if '{chat_name}' in text:
+		if ('{chat_name}' in text):
 				text = text.replace("{chat_name}",TypeChat_(chat_['type']))
-		if '{text}' in text:
-			if "text" in msg or 'reply' in msg or "text_action" in msg:
+		if ('{text}' in text):
+			if ("text" in msg) or ('reply' in msg) or ("text_action" in msg):
 				text = text.replace("{text}",  msg['text_action'] or msg['text'] or msg['reply']['text'])
 			else:
 				text = text.replace("{text}", "no text in the message")
-		if '{SendType}' in text:
-				if "action" in msg:
+		if ('{SendType}' in text):
+				if ("action" in msg):
 					text = text.replace("{SendType}", msg["action"])
 				else:
 					text = text.replace("{SendType}", "no action in the message")
@@ -51,12 +51,12 @@ def time_atual_(msg_data):
 		return segundos
 	
 def bash_(self, cmd):
-		if 'git' in self:
+		if ('git' in self):
 				cmd = "git " + cmd
 		comando = re.sub(self, "", cmd)
 		comando = re.sub('—', '--', comando)
 		shell = subprocess.check_output(comando, shell=True).decode('utf-8')
-		if len(shell) == 0:
+		if (len(shell) == 0):
 			shell = lang('Shell_Not', 'tools',sudo='True')
 		return shell
 
