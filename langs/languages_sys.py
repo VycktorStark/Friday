@@ -36,17 +36,55 @@ sudo_string_lang = {
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
     'id_text': '\033[37mID: \033[31m{}\033[37m',
-    "viewer": '''\033[37m\033[36m{user} \033[37m(\033[31m{user_id}\033[37m) {SendType}
-- Details
-* Sent from a {chat_name} (ID: \033[31m{chat_id}\033[37m)
-* Message send: \033[31m{text}\033[37m''',
-		'cmd_detected':'\033[37m* cmd executed: \033[31m{}\033[37m',
 		'started_webhook': '<li>Ok<h1>Bot started </h1></li>',
 		'nottokenFB': 'Missing check token matching',
 		'OktokenFB': "Check token match - OK"
 	}],
+	########## service.py ##########
 	"service":[{
 		"alertbotadded": "#ALERT:\n<b> Bot foi added to a group:</b>\n<code>Group Information: {}\nUser Information:{}</code>",
 		"alertbotremoved": "#ALERT:\n<b> Bot foi kicked to a group:</b>\n<code>Group Information: {}\nUser Information:{}</code>"
+	}],
+	########## viewer ##########
+	'viewer':[{
+		'###pinned_message': 'pinned message in chat',
+		'###added':"a user has been added the group",
+		"###removed":"a user has been removed the group",
+		"###botadded":"the bot was added to the group",
+		'###botremoved':"the bot was removed to the group",
+		"###forward":"message forwarded: {}",
+		"###forwardbot":"message forwarded from a bot: {}",
+		"###Photo": "sent a foto.",
+		"###Sticker": "sent a Sticker.",
+		"###Voice": "sent a voz.",
+		"###Audio": "sent a Audio.",
+		"###Video": "sent a Video.",
+		"###contact": "sent a contact.",
+		"###gif": "sent a Gif.",
+		"###pdf_file": "sent a pdf file.",
+		"###app": "sent a App.",
+		"###rar_file": "sent a RAR file.",
+		"###zip_file": "sent a Zip file.",
+		"###script_in_python": "sent a Script in python.",
+		"###text_file": "sent a Script de texto simples.",
+		"###script_in_shell": "sent a Script in shell.",
+		"###script_in_lua": "sent a Script in lua.",
+		"###script_in_HTML": "sent a Script in HTML.",
+		"###script_in_JSON": "sent a Script in JSON.",
+		"###script_in_JavaScrip": "sent a Script in JavaScript.",
+		"###script_in_octet-stream": "sent a Script in octet-stream.",
+		"###script_in_Markdown": "sent a Script in Markdown." ,
+		"###script_in_yaml": "sent a Script in yaml.",
+		"###file":"sent document",
+		'###url':"sent a url: {}",
+		'###text':"sent a message: {}",
+		"###reply":"replied the following text: {}",
+		'###mention': "mentioned someone\ndetails of the mention: {}",
+		"###bot_command": '\033[37m sent a command:: \033[31m{}\033[37m',
+		"viewer": '''\033[37m\033[36m{user} \033[37m(\033[31m{user_id}\033[37m) {text}
+- Details
+* Sent from a {chat_name} (ID: \033[31m{chat_id}\033[37m)
+* performed t he action: \033[31m{SendType}\033[37m
+'''
 	}]
 }

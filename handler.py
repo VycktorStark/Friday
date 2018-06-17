@@ -45,6 +45,10 @@ def handler_():
 					msg['edited_message'] = None
 				elif ('message' in msg):
 					msg_ = msg['message']
+					msg_['action'] = True
+					msg_['text_action']  = True
+					if 'text' in msg_:
+						msg_['action'] = "###text"
 					if ("migrate_from_chat_id" in msg_) or ("migrate_to_chat_id" in msg_):
 						old = msg['chat']['id']
 						new = msg['migrate_to_chat_id']
