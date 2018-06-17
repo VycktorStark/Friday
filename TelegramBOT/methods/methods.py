@@ -1,11 +1,4 @@
 #-*- coding: utf-8 -*-
-__author__ = ["Vycktor Stark "]
-__credits__ = [
-	"Tiago Danin per Sid v3.2 and v5.2",
-	"Yago Peres per Telegram Bot ",
-	"Durov per Telegram-BOT-API"
-	]
-__contribution__ = ["Francis Taylor"]
 __all__ = [
 'sendRequest', 
 'sendRequestTelegram', 
@@ -127,8 +120,7 @@ def sendMessage(chat_id=None, text=None, parse_mode=None,  disable_web_page_prev
 	
 def sendAdmin(chat_id=None,text=None, parse_mode=None, disable_web_page_preview=None,disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
 	if (chat_id == None) or (chat_id == 'suporte'): 
-			chat_id = config.Sys['suporte']
-	else: chat_id = config.Sys['logs'] or 438131290
+			chat_id = config.Sys['logs'] or 438131290
 	return sendRequestTelegram('sendMessage', locals())
 
 def deleteMessage(chat_id=None, message_id=None):
