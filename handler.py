@@ -45,7 +45,12 @@ def handler_():
 					msg['edited_message'] = None
 				elif ('message' in msg):
 					msg_ = msg['message']
-					if ('new_chat_member' in msg_) or ('left_chat_member' in msg_) or ('group_chat_created' in msg_):
+					if ("migrate_from_chat_id" in msg_) or ("migrate_to_chat_id" in msg_):
+						old = msg['chat']['id']
+						new = msg['migrate_to_chat_id']
+						print(lang("migrate", "main", sudo=True))
+						return flask.Response(status=200)
+					elif ('new_chat_member' in msg_) or ('left_chat_member' in msg_) or ('group_chat_created' in msg_):
 						status_service_(msg_)
 					elif ('forward_from' in msg_):
 						forward_msg_(msg_)
@@ -54,7 +59,7 @@ def handler_():
 					elif 'photo'  in msg_ or 'video'  in msg_ or 'document'  in msg_ or 'voice'  in msg_ or 'audio'  in msg_ or 'sticker'  in msg_ or 'entities'  in msg_:
 						msg_media_(msg_)
 					else:
-						msg_receive_(msg_)
+							msg_receive_(msg_)
 
 @app.errorhandler(404)
 def server_error(e):
