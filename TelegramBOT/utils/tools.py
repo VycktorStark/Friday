@@ -98,10 +98,10 @@ def bash_(self, cmd):
 				cmd = "git " + cmd
 		comando = re.sub(self, "", cmd)
 		comando = re.sub('—', '--', comando)
-		shell = subprocess.check_output(comando, shell=True)
+		shell = subprocess.check_output(comando, shell=True).decode('utf-8')
 		if len(shell) == 0:
 			shell = lang('Shell_Not', 'tools',sudo='True')
-		return shell.decode('utf8')
+		return shell
 
 def log_(message):
     print(message)

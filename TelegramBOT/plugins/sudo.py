@@ -2,10 +2,9 @@
 #-*- coding: utf-8 -*-
 from TelegramBOT import sendAdmin, config, plugins_, bash_
 def Function(msg, cmd, ln):
-	print(len(cmd))
 	global maintenance
 	if 'sudo' in cmd[0]:
-			if cmd[1] == 'update':
+			if cmd[1] == 'att':
 				sendAdmin(text="Done")
 				return plugins_()
 
@@ -20,13 +19,13 @@ def Function(msg, cmd, ln):
 				return config.Sys['maintenance']
 	elif 'shell' in cmd[0]:
 		print('aqui')
-		sendAdmin(text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
+		sendAdmin(chat_id=msg['chat']['id'],text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
 	elif 'git' in cmd[0]:
-		sendAdmin(text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
-
+		sendAdmin(chat_id=msg['chat']['id'],text=bash_(cmd[0], msg['text'].replace(cmd[0],'')))
+	
 plugin = {
 	'patterns': [
-		"^([/!#]sudo) (update)$",
+		"^[/!#](sudo) (att)$",
 		"^[/!#](sudo) (manut)$",
 		"^[/!#](sudo) (notmanut)$",
 		"^[/!#](shell) (.+)$",

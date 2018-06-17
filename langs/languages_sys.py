@@ -26,7 +26,7 @@ sudo_string_lang = {
 	}],
 	########## tools.py ##########
 	'tools':[{
-		"Shell_Not":  '<code>Nothing was done.</code>',
+		"Shell_Not":  'Nothing was done.',
 	}],
 	########## main.py ##########
 	'main':[{
