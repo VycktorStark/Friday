@@ -34,7 +34,7 @@ def handler_():
 			if data.get('messaging') and data['messaging'][0].get('message'):
 				FbBOT(data)
 		elif request.path == "/webhook/telegram":
-			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, msg_media_, msg_receive_
+			from TelegramBOT import callback_query_, status_service_, forward_msg_, reply_caption_, pinned_message_, msg_media_, msg_receive_
 			if Sys['debug_request'] == True:
 				print(json.dumps(msg, indent=1))
 			if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):
@@ -56,6 +56,8 @@ def handler_():
 						forward_msg_(msg_)
 					elif ('reply_to_message' in msg_):
 						reply_caption_(msg_)
+					elif ('pinned_message' in msg_):
+						pinned_message_(msg_)
 					elif 'photo'  in msg_ or 'video'  in msg_ or 'document'  in msg_ or 'voice'  in msg_ or 'audio'  in msg_ or 'sticker'  in msg_ or 'entities'  in msg_:
 						msg_media_(msg_)
 					else:

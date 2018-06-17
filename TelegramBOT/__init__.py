@@ -29,6 +29,11 @@ def reply_caption_(msg):
 			msg['reply']['text'] = msg['reply']['caption']
 		return msg_receive_(msg)
 
+def pinned_message_(msg):
+	msg['text'] = "###pinned_message"
+	msg = msg['pinned_message']
+	return msg_receive_(msg)
+
 def status_service_(msg):
 		msg['service'] = True
 		if ("new_chat_member" in msg):
