@@ -31,6 +31,7 @@ sudo_string_lang = {
 	########## main.py ##########
 	'main':[{
 		"plugin_err":'Failed plugin: {}',
+		"migrate":'\033[37m* The chat is being migrated para \033[36msupergrupo\033[37',
 		"sudo_not":'Hey, you can not tell me.!',
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
@@ -43,5 +44,9 @@ sudo_string_lang = {
 		'started_webhook': '<li>Ok<h1>Bot started </h1></li>',
 		'nottokenFB': 'Missing check token matching',
 		'OktokenFB': "Check token match - OK"
+	}],
+	"service":[{
+		"alertbotadded": "#ALERT:\n<b> Bot foi added to a group:</b>\n<code>Group Information: {}\nUser Information:{}</code>",
+		"alertbotremoved": "#ALERT:\n<b> Bot foi kicked to a group:</b>\n<code>Group Information: {}\nUser Information:{}</code>"
 	}]
 }

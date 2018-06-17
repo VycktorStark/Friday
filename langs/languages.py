@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 lang_en = {
 		'Error_request':"{user}, This request is invalid",
+		'newGroup': """<b>Hello, I'm Sexta-Feira</b>\n\nThank you <a href="https://telegram.me/{username}">{user}</a> for adding me to this group, I'll be back here at your disposal.""",
 		########### Plugins ###########
 		'about': [{ #about.py
 			'usage':"<code>/about</code> : To know information about me in detail", #about.py
@@ -18,6 +19,7 @@ to be a virtual assistant with functions of shortcuts and pluguis that made thei
 	},
 lang_es = {
 		'Error_request':"{user}, Esta solicitud es invalida",
+		'newGroup': '<b> Hola, soy Sexta-Feira </b>\n\nGracias <a href="https://telegram.me/{username}">{user}</a> por agregarme a este Grupo, estaré aquí a su disposición.',
 		########### Plugins ###########
 		'about': [{
 			'usage': "<code>/acerca</code> : Para saber información sobre mí detalladamente.", #about.py
@@ -35,6 +37,7 @@ para ser un asistente virtual con funciones de atajosy pluguis que facilitaron s
 	},
 lang_pt = {
 		'Error_request':"{user}, Essa solicitação é invalida",
+		'newGroup': '<b>Olá, Eu Sou Sexta-Feira</b>\n\nObrigado <a href="https://telegram.me/{username}">{user}</a> por me adicionar neste grupo, estarei aqui a sua disposição.',
 		########### Plugins ###########
 		'about': [{ #about.py
 			'usage': "<code>/sobre</code> : Para saber informações sobre mim detalhadamente.", #about.py
