@@ -1,1 +1,2 @@
-#### Francis Taylor per create some methods for telegram requests
+### CONTRIBUTORS
+ - Francis Taylor per create some methods for telegram requests
