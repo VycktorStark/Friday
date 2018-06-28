@@ -65,5 +65,10 @@ def bash_(self, txt):
 		finally: return resp
 
 def log_(message):
-    print(message.encode("ascii", "ignore").decode("ascii"))
-    sys.stdout.flush()
+		try:
+			print(message)
+			sys.stdout.flush()
+		except UnicodeEncodeError:
+				message_ = message.encode("ascii", "ignore").decode("ascii")
+				print(message_)
+				sys.stdout.flush()
