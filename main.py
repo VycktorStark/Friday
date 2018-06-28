@@ -1,32 +1,33 @@
-#-*- coding: utf-8 -*-
-from __init__ import re, os, sys, subprocess, time, lang, config, requests, json, flask, datetime, listdir, realpath, dirname
-__all__ = ['re', 'os', 'sys','subprocess', 'time', 'lang', 'config', 'requests', 'json', 'flask', 'datetime']
-from .utils.tools import *
-__all__ += utils.tools.__all__
-from .methods.methods import *
-__all__ += methods.methods.__all__
-__all__ += ['plugins_', 'plugins']
+#!/usr/bin/env python3
+# encoding=utf8
+from langs import lang
+import requests, json, time, subprocess, datetime, os, re, sys, psycopg2, flask, argparse, utils
+from flask import Flask, request, Response
+ru = lambda text: "\n\033[02;31m{}\n\033[00;37m".format(text)
+app = Flask(ru("".join(subprocess.getoutput('figlet F. R. I. D. A. Y.'))))
+app.config.from_object('settings')
+config = app.config
+from methods.methods import METHOD as api
 def plugins_():
-		curPath = dirname(realpath(__file__))
+		curPath = os.path.dirname(os.path.realpath(__file__))
 		global plugins
 		plugins = []
-		pluginFiles = [curPath + "/plugins/" + f for f in listdir(curPath + "/plugins") if re.search('^.+\.py$', f)]
+		pluginFiles = [curPath + "/plugins/" + f for f in os.listdir(curPath + "/plugins") if re.search('^.+\.py$', f)]
 		for file in pluginFiles:
 			values = {}
 			with open(file, encoding='utf-8') as f:
 				code = compile(f.read(), file, 'exec')
 				exec(code, values)
 			plugins.append(values['plugin'])
-
 def msg_receive_(msg):	
 		msg_from_id = msg['from']['id']
 		chat_id = msg['chat']['id']
 		if config['VIEW_THE_TERMINAL'] == True: 
-			resp, code = viewer_(msg)
-			if code == 404: sendAdmin(text=resp)
-			log_(resp)
-		if time_atual_(msg['date']) > int(10):
-			return flask.Response(status=200)
+			resp, code = utils.viewer_(msg)
+			if code == 404: api.sendAdmin(text=resp)
+			utils.log_(resp)
+		if utils.time_atual_(msg['date']) > int(10):
+			return Response(status=200)
 		else:
 			if (not "text" in msg): msg['text'] = msg['action']
 			for aPlugin in plugins:
@@ -39,15 +40,15 @@ def msg_receive_(msg):
 									config["LANG"] = msg['from']['language_code'][:2]
 								if aPlugin['sudo'] == True:
 									if msg_from_id in config['SUDO']: aPlugin['function'](msg, cmd, config["LANG"])
-									else: sendMessage(chat_id=chat_id, text=lang('sudo_not', 'main', sudo=True))
+									else: api.sendMessage(chat_id=chat_id, text=lang('sudo_not', 'main', sudo=True))
 								elif (msg_from_id in config['SUDO']) or (config['MAINTENACE'] == False):
 										try:
 												resp = aPlugin['function'](msg, cmd, config["LANG"])
 										except Exception as err:
-												log_(sendAdmin(text=lang('plugin_err', 'main', sudo='True').format(msg['text'], err)).response['result']['text'])
+												utils.log_(api.sendAdmin(text=lang('plugin_err', 'main', sudo='True').format(msg['text'], err))['result']['text'])
 										else:
 												if (resp != None) and (resp != False):
-													sendMessage(chat_id=chat_id, text=resp, parse_mode="HTML")
+													api.sendMessage(chat_id=chat_id, text=resp, parse_mode="HTML")
 								break
 
 def pinned_message_(msg):
@@ -152,3 +153,4 @@ def msg_media_(msg):
 					msg['action'] = '###bot_command'
 					msg['text'] = msg['text'].replace("@{}".format(config['USERNAMEBOT']),'')
 		return msg_receive_(msg)
+import handler

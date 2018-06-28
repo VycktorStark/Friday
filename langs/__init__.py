@@ -1,4 +1,4 @@
-__all__ = ['lang']
+__all__ = []
 from .languages import lang_en, lang_es, lang_pt
 from .languages_sys import sudo_string_lang
 languages  = {
@@ -13,9 +13,7 @@ languages  = {
   "pt":    lang_pt, "pt-en": lang_en,
   "de":    lang_en, "de-en": lang_en,
 }
-
 def lang(text_, ln=None, sudo=None):
-	ln = ln or  'en'
 	if sudo != None:
 		resp = sudo_string_lang[ln][0][text_]
 	else:
@@ -23,3 +21,4 @@ def lang(text_, ln=None, sudo=None):
 			ln = languages[ln]
 		resp = ln[text_]
 	return resp
+__all__ += ['lang']

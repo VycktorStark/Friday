@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding=utf8
-from __init__ import app, os, subprocess, argparse,sys, time
+from main import app, os, subprocess, argparse,sys, time, plugins_
 PARSER = argparse.ArgumentParser(description='RUN COMMAND')
 PARSER.add_argument('--install', '-i', help='install dependency', action="store_true")
 PARSER.add_argument('--synchronize', '-s', type=str, help='synchronize repository use: 1 to synchronize and clean any changes that might give errors 2 to only synchronize')
@@ -15,4 +15,5 @@ elif args.synchronize:
   else:
     print('\n\033[02;37mThis is not valid, check the valid commands by executing: "\033[01;31mpython run -h\033[02;37m"\n\033[00;37m')
 else:
+  plugins_()
   app.run(port=int(os.getenv('PORT', 3000)), host='0.0.0.0')

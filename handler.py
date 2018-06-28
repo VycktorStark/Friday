@@ -1,4 +1,4 @@
-from __init__ import app, config, lang, request, requests, Response, json, bot
+from main import app, api, config, lang, request, requests, Response, json, callback_query_, status_service_, forward_msg_, reply_caption_, pinned_message_, msg_media_, msg_receive_
 @app.before_first_request
 def init_():
 	print(lang('int', 'main', sudo='True').format(config['IDBOT']))
@@ -20,7 +20,7 @@ def handler_():
 			if config['DEBUG_REQUEST'] == True: print(json.dumps(msg, indent=1))
 			if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):
 				if ('callback_query' in msg):
-						bot.callback_query_(msg['callback_query'])
+						callback_query_(msg['callback_query'])
 				elif ('edited_message' in msg):
 						msg['message'] = msg['edited_message']
 						msg['edited_message'] = None
@@ -37,16 +37,16 @@ def handler_():
 						elif ('new_chat_member' in msg_) or ('left_chat_member' in msg_) or ('group_chat_created' in msg_):
 								status_service_(msg_)
 						elif ('forward_from' in msg_):
-								bot.forward_msg_(msg_)
+								forward_msg_(msg_)
 						elif ('reply_to_message' in msg_):
-								bot.reply_caption_(msg_)
+								reply_caption_(msg_)
 						elif ('pinned_message' in msg_):
-								bot.pinned_message_(msg_)
+								pinned_message_(msg_)
 						elif ('photo'  in msg_) or ('video'  in msg_) or ('document'  in msg_) or ('voice'  in msg_) or ('audio'  in msg_) or ('sticker'  in msg_) or ('entities'  in msg_):
-								bot.msg_media_(msg_)
+								msg_media_(msg_)
 						else:
-								bot.msg_receive_(msg_)
-								
+								msg_receive_(msg_)
+
 @app.errorhandler(404)
 def server_error(e):
 	return Response(status=200)

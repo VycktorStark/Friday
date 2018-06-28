@@ -1,4 +1,4 @@
-from __main__ import psycopg2, comfig
+from main import psycopg2, comfig
 class Conexao(object):
 	_db=None;
 	def __init__(self):
