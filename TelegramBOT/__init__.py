@@ -16,16 +16,14 @@ def plugins_():
 			with open(file, encoding='utf-8') as f:
 				code = compile(f.read(), file, 'exec')
 				exec(code, values)
-			plugin = values['plugin']
-			plugins.append(plugin)
+			plugins.append(values['plugin'])
 
 def msg_receive_(msg):	
 		msg_from_id = msg['from']['id']
 		chat_id = msg['chat']['id']
 		if config['VIEW_THE_TERMINAL'] == True: 
 			resp, code = viewer_(msg)
-			if code == 404:
-				sendAdmin(text=resp)
+			if code == 404: sendAdmin(text=resp)
 			log_(resp)
 		if time_atual_(msg['date']) > int(10):
 			return flask.Response(status=200)
@@ -35,21 +33,18 @@ def msg_receive_(msg):
 					for patterns in aPlugin['patterns']:
 						cmd = re.search(patterns, msg['text'], re.IGNORECASE)
 						if cmd:
-								if cmd.groups():
-									cmd = cmd.groups()
-								else:
-									cmd = cmd.group()
-								ln_ = (msg['from']['language_code'][:2] or 'en')
+								if cmd.groups(): cmd = cmd.groups()
+								else: cmd = cmd.group()
+								if "language_code" in  msg['from']:
+									config["LANG"] = msg['from']['language_code'][:2]
 								if aPlugin['sudo'] == True:
-									if msg_from_id in config['SUDO']: aPlugin['function'](msg, cmd, ln_)
+									if msg_from_id in config['SUDO']: aPlugin['function'](msg, cmd, config["LANG"])
 									else: sendMessage(chat_id=chat_id, text=lang('sudo_not', 'main', sudo=True))
 								elif (msg_from_id in config['SUDO']) or (config['MAINTENACE'] == False):
 										try:
-												resp = aPlugin['function'](msg, cmd, ln_)
-										except Exception:
-												err_ = lang('plugin_err', 'main', sudo='True').format(msg['text'], Exception)
-												sendAdmin(text=Exception)
-												print(Exception)
+												resp = aPlugin['function'](msg, cmd, config["LANG"])
+										except Exception as err:
+												log_(sendAdmin(text=lang('plugin_err', 'main', sudo='True').format(msg['text'], err)).response['result']['text'])
 										else:
 												if (resp != None) and (resp != False):
 													sendMessage(chat_id=chat_id, text=resp, parse_mode="HTML")
