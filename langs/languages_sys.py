@@ -47,7 +47,7 @@ sudo_string_lang = {
 	}],
 	########## viewer ##########
 	'viewer':[{
-		'###pinned_message': 'pinned message in chat',
+		'###pinned_message': 'pinned message in chat\nDetails: {}',
 		'###added':"a user has been added the group",
 		"###removed":"a user has been removed the group",
 		"###botadded":"the bot was added to the group",

@@ -15,7 +15,10 @@ to be a virtual assistant with functions of shortcuts and pluguis that made thei
 		}],
 		'ping': [{
 			'usage': '<code>/ping</code> : To check if the bot is online', #ping.py
-}],
+		}],
+		'joke': [{
+			'usage': '<code>/joke</code> : Tells a joke in english.', #joke.py
+		}],
 	},
 lang_es = {
 		'Error_request':"{user}, Esta solicitud es invalida",
@@ -34,6 +37,9 @@ para ser un asistente virtual con funciones de atajosy pluguis que facilitaron s
 		'ping': [{
 			'usage': '<code>/ping</code> : Para comprobar si el bot está en línea', #ping.py
 }],
+		'joke': [{
+			'usage': '<code>/joke</code> : Dice una broma en inglés.', #joke.py
+		}],
 	},
 lang_pt = {
 		'Error_request':"{user}, Essa solicitação é invalida",
@@ -52,4 +58,7 @@ lang_pt = {
 		'ping': [{
 			'usage':'<code>/ping</code> : Para verificar se o bot está on', #ping.py
 }],
+		'joke': [{
+			'usage': '<code>/joke</code> : Conta uma piada em inglês.', #joke.py
+		}],
 	}

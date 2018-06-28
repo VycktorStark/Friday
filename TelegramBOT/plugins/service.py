@@ -1,4 +1,4 @@
-from TelegramBOT import msg_replace_, sendAdmin, config, json, lang
+from TelegramBOT import msg_replace_, sendAdmin, json, lang
 def Function(msg, cmd, ln):
 		if "botadded" in cmd[0]:
 			sendAdmin(text=lang('alertbotadded', 'service', sudo=True).format(json.dumps(msg['chat'], indent=1), json.dumps(msg['adder'], indent=1)), parse_mode="HTML")

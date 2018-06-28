@@ -1,13 +1,13 @@
-import psycopg2
+from __main__ import psycopg2, comfig
 class Conexao(object):
 	_db=None;
 	def __init__(self):
 		self._db = psycopg2.connect(
-		database = config.DATABASE['database'],
-		user = config.DATABASE['user'],
-		password = config.DATABASE['password'],
-		host = config.DATABASE['host'],
-		port = config.DATABASE['port']
+		database = config['DATABASE']['database'],
+		user = config['DATABASE']['user'],
+		password = config['DATABASE']['password'],
+		host = config['DATABASE']['host'],
+		port = config['DATABASE']['port']
 	)
 	def create(self, sql): #create table condition in database
 				db = self._db

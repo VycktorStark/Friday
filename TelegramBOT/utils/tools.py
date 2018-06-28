@@ -19,8 +19,8 @@ def msg_replace_(msg, text):
 		if ('{chat_name}' in text):
 				text = text.replace("{chat_name}",TypeChat_(chat_['type']))
 		if ('{text}' in text):
-			if ("text" in msg) or ('reply' in msg) or ("text_action" in msg):
-				text = text.replace("{text}",  msg['text_action'] or msg['text'] or msg['reply']['text'])
+			if ("text_action" in msg and msg['text_action'] != True) or ("text" in msg):
+				text = text.replace("{text}",  (msg['text_action']) or (msg['text']))
 			else:
 				text = text.replace("{text}", "no text in the message")
 		if ('{SendType}' in text):
@@ -32,8 +32,10 @@ def msg_replace_(msg, text):
 def viewer_(msg):
 		if ("action" in msg) and ("text" in msg):
 			msg['text_action'] = lang(msg['action'], 'viewer', sudo=True).format(msg['text'])
-		viewer = msg_replace_(msg, lang('viewer', 'viewer', sudo=True))
-		log_(viewer)
+		try:
+			return msg_replace_(msg, lang('viewer', 'viewer', sudo=True)), 200
+		except Exception as error: 
+			return "Error in viewer shell: {}".format(error), 404
 	
 def TypeChat_(self):
 		self = self.replace('supergroup', 'Super Group').replace('group', 'Group Common').replace('private', 'Chat Private')
@@ -50,15 +52,17 @@ def time_atual_(msg_data):
 		segundos = int((hora_atual-msg_data)/60)
 		return segundos
 	
-def bash_(self, cmd):
+def bash_(self, txt):
+		txt = txt.replace(self,'').replace('—','--')
 		if ('git' in self):
-				cmd = "git " + cmd
-		comando = re.sub(self, "", cmd)
-		comando = re.sub('—', '--', comando)
-		shell = subprocess.check_output(comando, shell=True).decode('utf-8')
-		if (len(shell) == 0):
-			shell = lang('Shell_Not', 'tools',sudo='True')
-		return shell
+				txt = "git {}".format(txt)
+		text = txt
+		try:
+			resp = subprocess.check_output(text, shell=True).decode('utf8')
+			if (len(resp) == 1) and resp == "\n":
+				resp = resp.replace("\n","Ok")
+		except Exception: resp = "Ok"
+		finally: return resp
 
 def log_(message):
     print(message.encode("ascii", "ignore").decode("ascii"))

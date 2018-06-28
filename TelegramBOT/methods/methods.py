@@ -54,7 +54,7 @@ __all__ = [
 'unpinChatMessage',
 'answerCallbackQuery',
 'answerInlineQuery']
-from TelegramBOT import requests, json, config, flask, log_
+from TelegramBOT import requests, json, config, flask, log_, lang
 
 def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None, setime=None, post=False):
 		try:
@@ -64,7 +64,7 @@ def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None
 							data = requests.get(url, params=params, headers=headers, auth=auth, files=files)
 		except Exception as error:
 				print(error)
-		if data.status_code == 200:
+		if (data.status_code == 200):
 			return 200, data
 		else:
 				err = 'Error in request! {}\n{}\n\n{}'.format(url, params, data.text)
@@ -74,10 +74,10 @@ def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None
 
 def sendRequestTelegram(methods=None, query=None, file_=None):
 		global RESPOSTA
-		url = config.BOT['API'].format(token=config.BOT['token'] ,method=methods)
+		url = config['TELEGRAM_API'].format(method=methods)
 		code, data = sendRequest(url=url, params=query, files=file_)
-		if code == 200:
-				RESPOSTA = 'Done'
+		if (code == 200):
+				RESPOSTA = data.json()
 		else:
 				code_err_tr(data)
 				RESPOSTA = data.json()
@@ -90,7 +90,7 @@ def code_err_tr(dat):
 		data = dat.json()
 		error_code = data['error_code']
 		status_code = dat.status_code
-		if status_code != 403 and status_code != 429 and status_code != 111:
+		if (status_code != 403) and (status_code != 429) and (status_code != 111):
 			try:
 				sendAdmin(text=lang("ONE_FIELD", 'bad_request', sudo=True).format(lang(status_code, 'bad_request', sudo=True)), parse_mode='HTML')
 			except Exception as error:
@@ -119,8 +119,12 @@ def sendMessage(chat_id=None, text=None, parse_mode=None,  disable_web_page_prev
 		return sendRequestTelegram('sendMessage', locals())
 	
 def sendAdmin(chat_id=None,text=None, parse_mode=None, disable_web_page_preview=None,disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
-	if (chat_id == None) or (chat_id == 'suporte'): 
-			chat_id = config.Sys['logs'] or 438131290
+	if chat_id is None:
+			chat_id = int(config['SUPPORT'])
+	elif int(chat_id) == "logs":
+			chat_id = int(config['LOGS'])
+	elif int(chat_id) == "support":
+			chat_id = int(config['LOGS'])
 	return sendRequestTelegram('sendMessage', locals())
 
 def deleteMessage(chat_id=None, message_id=None):
