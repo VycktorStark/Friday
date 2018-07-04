@@ -15,5 +15,4 @@ elif args.synchronize:
   else:
     print('\n\033[02;37mThis is not valid, check the valid commands by executing: "\033[01;31mpython run -h\033[02;37m"\n\033[00;37m')
 else:
-  plugins_()
-  app.run(port=int(os.getenv('PORT', 3000)), host='0.0.0.0')
+    app.run(port=int(os.getenv('PORT', 3000)), host='0.0.0.0')
