@@ -4,7 +4,7 @@ from main import api, utils, config, plugins_, json
 def Function(msg, cmd, ln):
 	global maintenance
 	if 'sudo' in cmd[0]:
-			if (cmd[1] == 'att'):
+			if (cmd[1] == 'update'):
 				api.sendAdmin(chat_id=msg['chat']['id'], text="Done")
 				return plugins_()
 
@@ -27,7 +27,7 @@ def Function(msg, cmd, ln):
 	
 plugin = {
 	'patterns': [
-		"^[/!#](sudo) (att)$",
+		"^[/!#](sudo) (update)$",
 		"^[/!#](sudo) (manut)$",
 		"^[/!#](sudo) (notmanut)$",
 		"^[/!#](shell) (.+)$",

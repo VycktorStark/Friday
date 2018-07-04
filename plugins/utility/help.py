@@ -1,7 +1,7 @@
 from main import utils, plugins, lang
 def plugi(cmd_=None):
 	lista = []
-	for aPlug in plugins:
+	for aPlug in plugins.plugins:
 		if not aPlug["sudo"]== True:
 				lista.append(aPlug)
 	x = '\n'
