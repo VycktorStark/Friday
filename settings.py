@@ -15,16 +15,6 @@ SUDO = {
         "MASTER": True,
         "SUDO": True,
       }],
-      199915939: [{
-        "Name": "Lucas",
-        "MASTER": False,
-        "SUDO": True,
-      }],
-      479278708: [{
-        "Name": "Taylor",
-        "MASTER": False,
-        "SUDO": True,
-      }],
       438131290: [{
         "Name": "Vycktor",
         "MASTER": True,
