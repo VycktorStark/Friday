@@ -18,7 +18,7 @@ def Function(msg, cmd, ln):
 				api.sendAdmin(chat_id=msg['chat']['id'], text="Done")
 				return config['MAINTENACE']
 	elif ('shell' in cmd[0]) or ('git' in cmd[0]):
-		sendAdmin(chat_id=msg['chat']['id'],text=utils.bash_(cmd[0], cmd[1]))
+		api.sendAdmin(chat_id=msg['chat']['id'],text=utils.bash_(cmd[0], cmd[1]))
 	elif 'debug' in cmd[0]:
 				if len(cmd) ==2 and cmd[1] == "user" and "reply" in msg:
 					api.sendAdmin(chat_id=msg['chat']['id'],text="<code>{}</code>".format(json.dumps(msg['reply']['from'], indent=1)), parse_mode="HTML")
