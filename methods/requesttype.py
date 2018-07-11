@@ -3,7 +3,7 @@ __all__ = ['sendRequest', 'sendRequestTelegram', 'organize_argument', 'code_err_
 url = config['TELEGRAM_API']
 def sendRequest(url, type=None, params=None, headers=None, auth=None, files=None, setime=None, post=False):
 		try:
-				if post is True:
+				if post == True:
 							data = requests.post(url, params=params, headers=headers, auth=auth, files=files)
 				else:
 							data = requests.get(url, params=params, headers=headers, auth=auth, files=files)
@@ -19,7 +19,7 @@ def sendRequestTelegram(method, query=None, file_=None, post=None):
 		if (status_code != 200) and ('description' in data.json()):
 			if (status_code == 400): status_code = getcode(data.json()['description'])
 			if (status_code != 403) and (status_code != 429) and (status_code != 111) and (status_code != 132):
-				query['text'] = lang("error_occurred", 'bad_request', sudo=True).format(status_code, error)
+				query['text'] = lang("error_occurred", 'bad_request', sudo=True).format(status_code, data.json()['description'])
 				query['parse_mode'] = 'HTML'
 			query['chat_id'] = config['LOGS']
 			code, data = sendRequest(url=url.format(method='sendMessage'), params=query)

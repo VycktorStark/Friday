@@ -61,31 +61,57 @@ class METHOD:
 					return r.response
 
 			def sendPhoto(chat_id=None, photo=None, capition=None, parse_mode=None, disable_notification=None, reply_to_message_id=None, reply_markup=None):
-					photo=photo
-					r = sendRequestTelegram('sendPhoto', organize_argument(locals(), item=['photo']), file_=photo)
+					if type(photo) == str:
+						r = sendRequestTelegram('sendPhoto', locals())
+					else:
+						files = dict()
+						files['photo'] = photo
+						r = sendRequestTelegram('sendPhoto', organize_argument(locals(), item=['photo']), file_=files, post=True)
 					return r.response
 
-			def sendAudio(chat_id=None, audio=None, duration=None, disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
-					audio=audio
-					r = sendRequestTelegram('sendAudio', organize_argument(locals(), item=['audio']), file_=audio)
-
+			def sendAudio(chat_id=None, audio=None, post=True, duration=None, disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
+					if type(audio) == str:
+						r = sendRequestTelegram('sendAudio', locals())
+					else:
+						files = dict()
+						files['audio'] = audio
+						r = sendRequestTelegram('sendAudio', organize_argument(locals(), item=['audio']), file_=files, post=True)
+					return r.response
+	
 			def sendVoice(chat_id=None, voice=None, duration=None, disable_notification=None, reply_to_message_id=None, reply_markup=None, inline_keyboard=None):
-					voice=voice
-					r = sendRequestTelegram('sendVoice', organize_argument(locals(), item=['voice']), file_=voice)
+					if type(voice) == str:
+						r = sendRequestTelegram('sendVoice', locals())
+					else:
+						files = dict()
+						files['voice'] = voice
+						r = sendRequestTelegram('sendVoice', organize_argument(locals(), item=['voice']), file_=files, post=True)
+					return r.response
 
 			def sendVideo(chat_id=None, video=None, duration=None, width=None, height=None, caption=None, parse_mode=None, supports_streaming=None, disable_notification=False, reply_to_message_id=None, reply_markup=None):
-					video=video
-					r = sendRequestTelegram('sendVideo', organize_argument(locals(), item=['video']), file_=video)
+					if type(video) == str:
+						r = sendRequestTelegram('sendVideo', locals())
+					else:
+						files = dict()
+						files['video'] = video
+						r = sendRequestTelegram('sendVideo', organize_argument(locals(), item=['video']), file_=files, post=True)
 					return r.response
 
 			def sendVideoNote(chat_id=None, video_note=None, duration=None, length=None, disable_notification=False, reply_to_message_id=None, reply_markup=None):
-					video_note=video_note
-					r = sendRequestTelegram('sendVideoNote', organize_argument(locals(), item=['video_note']), file_=video_note)
+					if type(video) == str:
+						r = sendRequestTelegram('sendVideoNote', locals())
+					else:
+						files = dict()
+						files['video_note'] = video_note
+						r = sendRequestTelegram('sendVideoNote', organize_argument(locals(), item=['video_note']), file_=files, post=True)
 					return r.response
 
 			def sendDocument(chat_id=None, document=None, caption=None, parse_mode=None, disable_notification=False, reply_to_message_id=None, reply_markup=None):
-					document=document
-					r = sendRequestTelegram('sendDocument', organize_argument(locals(), item=['document']), file_=document)
+					if type(document) == str:
+						r = sendRequestTelegram('sendDocument', locals())
+					else:
+						files = dict()
+						files['document'] = document
+						r = sendRequestTelegram('sendDocument', organize_argument(locals(), item=['document']), file_=files, post=True)
 					return r.response
 
 			def sendContact(chat_id, phone_number=None, first_name=None, last_name=None, disable_notification=False, reply_to_message_id=None, reply_markup=None):
@@ -141,8 +167,12 @@ class METHOD:
 					return r.response
 
 			def sendMediaGroup(chat_id=None, media=None, disable_notification=None, reply_to_message_id=None):
-					media=media
-					r = sendRequestTelegram('sendMediaGroup', organize_argument(locals(), item=['media']), file_=media)
+					if type(media) == str:
+						r = sendRequestTelegram('sendMediaGroup', locals())
+					else:
+						files = dict()
+						files['media'] = media
+						r = sendRequestTelegram('sendMediaGroup', organize_argument(locals(), item=['media']), file_=files, post=True)
 					return r.response
 
 				### Group
@@ -200,8 +230,12 @@ class METHOD:
 					return r.response
 
 			def setChatPhoto(chat_id=None, photo=None):
-					photo=photo
-					r = sendRequestTelegram('setChatPhoto', organize_argument(locals(), item=['photo']), file_=photo)
+					if type(photo) == str:
+						r = sendRequestTelegram('setChatPhoto', locals())
+					else:
+						files = dict()
+						files['photo'] = photo
+						r = sendRequestTelegram('setChatPhoto', organize_argument(locals(), item=['photo']), file_=files, post=True)
 					return r.response
 
 			def deleteChatPhoto(chat_id=None):
