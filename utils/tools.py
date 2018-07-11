@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
-__all__ = ['time_atual_', 'bash_', 'msg_replace_', 'TypeChat_', 'viewer_', 'log_']
-from main import sys, lang, re, subprocess, time, json
+__all__ = ['time_atual_', 'bash_', 'msg_replace_', 'TypeChat_', 'viewer_', 'log_', 'polling']
+from main import sys, lang, re, subprocess, time, json, requests
 def viewer_(msg):
 		if ("action" in msg) and ("text" in msg):
 			msg['text_action'] = lang(msg['action'], 'viewer', sudo=True).format(msg['text'])
@@ -37,7 +37,18 @@ def log_(message):
 		except UnicodeEncodeError:
 				print(message.encode("ascii", "ignore").decode("ascii"))
 		sys.stdout.flush()
-		
+
+def polling():
+	from methods.methods import METHOD as api
+	api.deleteWebhook()
+	if 'result' in resp:
+		temp = 0
+		resp = api.getUpdates(offset=temp, timeout=1000+l_, allowed_updates='message')
+		temp  = resp['result'][0]['update_id'] + 1
+		resp = requests.post("http://localhost:3000/webhook", data=json.dumps(resp['result'][0]))
+		return resp
+	return False
+
 def msg_replace_(msg, text):
 		user_ = msg['from']
 		chat_ = msg['chat'] 
