@@ -38,6 +38,7 @@ def handler_():
 						msg['text_action']                                                =     True
 						if 'text' in msg: msg['action']                                   =     "###text"
 						if ("migrate_from_chat_id" in msg) or ("migrate_to_chat_id" in msg):
+								if ("migrate_from_chat_id" in msg): msg['migrate_to_chat_id'] = msg['migrate_from_chat_id']
 								msg['old']                                                    =     msg['migrate_from_chat_id']
 								msg['new']                                                    =     msg['chat']['id']
 								log_(lang("migrate", "main", sudo=True))
