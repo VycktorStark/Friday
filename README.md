@@ -1,4 +1,3 @@
-
       _____    ____       ___      ____           __       __   __
      |  ___|  |  _ \     |_ _|    |  _ \         /  \      \ \ / /
      | |_     | |_) |     | |     | | | |       /  _ \      \ V /    BUTLER PROJECT
@@ -17,10 +16,6 @@ However, we warn you that to understand everything, you need to have some progra
  
 #### Developers of this project:
  - [Adilson Cavalcante](https://github.com/Player4NoobWinner) 
-
- - [Francis Taylor](https://github.com/francis-taylor) 
-
- - [Lucas Alberto](https://github.com/lucas-alberto98)  
 
  - [Vycktor Stark](https://github.com/VycktorStark)
  
