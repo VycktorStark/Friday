@@ -38,11 +38,12 @@ def handler_():
 						msg['text_action']                                                =     True
 						if 'text' in msg: msg['action']                                   =     "###text"
 						if ("migrate_from_chat_id" in msg) or ("migrate_to_chat_id" in msg):
+								msg['action'] = '###migrate'
 								if ("migrate_from_chat_id" in msg): msg['migrate_to_chat_id'] = msg['migrate_from_chat_id']
 								msg['old']                                                    =     msg['migrate_from_chat_id']
 								msg['new']                                                    =     msg['chat']['id']
-								log_(lang("migrate", "main", sudo=True))
-								return Response(status=200)
+
+								return msg_receive_(msg)
 						elif ('new_chat_member' in msg) or ('left_chat_member' in msg) or ('group_chat_created' in msg):
 							msg['service'] = True
 							if ("new_chat_member" in msg):

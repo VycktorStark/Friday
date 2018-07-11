@@ -45,12 +45,11 @@ sudo_string_lang = {
 	########## main.py ##########
 	'main':[{
 		"plugin_err":'Failed to execute: {}\nDetail: {}',
-		"migrate":'\033[37m* The chat is being migrated para \033[36msupergrupo\033[37',
 		"sudo_not":'Hey, you can not tell me.!',
     'int': '\033[31m  Friday was started!\n  \033[37mID: \033[31m{}\033[37m',
     'jump line':'\n___________________\n',
     'id_text': '\033[37mID: \033[31m{}\033[37m',
-		'started_webhook': '<li>Ok<h1>Bot started </h1></li>',
+		'started_webhook': '<li>Done<h1>{}</h1></li>',
 		'nottokenFB': 'Missing check token matching',
 		'OktokenFB': "Check token match - OK"
 	}],
@@ -62,6 +61,7 @@ sudo_string_lang = {
 	########## viewer ##########
 	'viewer':[{
 		'###pinned_message': 'pinned message in chat\nDetails: {}',
+		"###migrate":'\033[37m* The chat is being migrated para \033[36msupergrupo\033[37m',
 		'###added':"a user has been added the group",
 		"###removed":"a user has been removed the group",
 		"###botadded":"the bot was added to the group",
