@@ -17,6 +17,7 @@ def handler_():
 		if config['DEBUG_REQUEST'] == True: print(json.dumps(msg, indent=1))
 		if ('message' in msg) or ('callback_query' in msg) or ('edited_message' in msg):
 			if ('callback_query' in msg):
+					msg = msg['callback_query']
 					msg['text'] = '###cb: {}'.format(msg['data'])
 					msg['old_text'] = msg['message']['text']
 					msg['old_date'] = msg['message']['date']
