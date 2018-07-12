@@ -24,8 +24,6 @@ def sendRequestTelegram(method, query=None, file_=None, post=None):
 			query['chat_id'] = config['LOGS']
 			code, data = sendRequest(url=url.format(method='sendMessage'), params=query)
 		RESPOSTA = data.json()
-		if not RESPOSTA['ok']:
-			return Response(status=200)
 		return Response(status=200, headers={"Content-Type": "application/json"}, response=RESPOSTA)
 	
 def organize_argument(params, item=[]):
