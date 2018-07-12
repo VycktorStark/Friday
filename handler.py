@@ -20,7 +20,7 @@ def handler_():
 					msg = msg['callback_query']
 					msg['text'] = '###cb: {}'.format(msg['data'])
 					msg['old_text'] = msg['message']['text']
-					msg['old_date'] = msg['message']['date']
+					msg['date'] = msg['message']['date']
 					msg['cb'] = True
 					msg['cb_id'] = msg['id']
 					msg['message_id'] = msg['message']['message_id']
