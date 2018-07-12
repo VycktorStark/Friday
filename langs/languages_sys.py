@@ -38,6 +38,17 @@ sudo_string_lang = {
 			'Bad Request: Too many requests: retry later': 429,
 			'Bad Request: Too big total timeout': 430,
 	}],
+	########## plugin ##########
+	'plugin' : [{
+		'info' : """{infoplugins} ✔
+💼 - Utility: {infoutility}
+{infoupdate_utility}
+💈 - Entertainment: {infoentertainment}
+{infoupdate_entertainment}
+🗄 - Advanced: {infoadvanced}
+{infoupdate_advanced}""",
+		'updatecommand' : "📟 Updated Commands: {}"
+	}],
 	########## tools.py ##########
 	'tools':[{
 		"Shell_Not":  'Nothing was done.',
