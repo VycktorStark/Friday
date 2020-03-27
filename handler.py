@@ -1,4 +1,4 @@
-from main import app, api, config, lang, request, Response, json, msg_receive_
+    from main import app, api, config, lang, request, Response, json, msg_receive_
 @app.before_first_request
 def init_(): print(lang('int', 'main', sudo='True').format(config['IDBOT']))
 @app.errorhandler(404)
@@ -76,36 +76,37 @@ def handler_():
 						msg['text'] = msg['pinned_message']['text']
 						return msg_receive_(msg)
 					elif ('photo'  in msg) or ('video'  in msg) or ('document'  in msg) or ('voice'  in msg) or ('audio'  in msg) or ('sticker'  in msg) or ('entities'  in msg):
-						if ('photo' in msg):																							msg['action'] = "###Photo"
-						elif ('sticker' in msg):																					msg['action'] = "###Sticker"
-						elif ('voice' in msg):																						msg['action'] = "###Voice"
-						elif ('audio' in msg):																						msg['action'] = "###Audio"
-						elif ('video' in msg):																						msg['action'] = "###Video"
-						elif ('contact' in msg):																					msg['action'] = "###contact"
+						if ('photo' in msg):msg['action'] = "###Photo"
+						elif ('sticker' in msg):msg['action'] = "###Sticker"
+						elif ('voice' in msg):msg['action'] = "###Voice"
+						elif ('audio' in msg):msg['action'] = "###Audio"
+						elif ('video' in msg):msg['action'] = "###Video"
+						elif ('contact' in msg):msg['action'] = "###contact"
 						elif ('document' in msg and msg['document']['mime_type']):
 								document = msg['document']['mime_type']
-								if (document == "video/mp4"):																	msg['action'] = "###gif"
-								elif (document == "application/x-bittorrent"):								msg['action'] = "###pdf_file"    
-								elif (document == "application/vnd.android.package-archive"):	msg['action'] = "###app"    
-								elif (document == "application/x-rar"):												msg['action'] = "###rar_file"    
-								elif (document == "application/x-zip"):												msg['action'] = "###zip_file"    
-								elif (document == "text/x-python"):														msg['action'] = "###script_in_python"    
-								elif (document == "text/plain"):															msg['action'] = "###text_file"    
-								elif (document == "application/x-shellscript"):								msg['action'] = "###script_in_shell"    
-								elif (document == "text/x-lua"):															msg['action'] = "###script_in_lua"    
-								elif (document == "text/html"):																msg['action'] = "###script_in_HTML"    
-								elif (document == "application/json"):												msg['action'] = "###script_in_JSON"    
-								elif (document == "application/javascript"):									msg['action'] = "###script_in_JavaScript"    
-								elif (document == "application/octet-stream"):								msg['action'] = "###script_in_octet-stream"    
-								elif (document == "text/markdown"):														msg['action'] = "###script_in_Markdown"    
-								elif (document == "application/x-yaml"):											msg['action'] = "###script_in_yaml."
-								else: 																												msg['action'] = "###file"
+								if (document == "video/mp4"):msg['action'] = "###gif"
+								elif (document == "application/x-bittorrent"):msg['action'] = "###pdf_file"    
+								elif (document == "application/vnd.android.package-archive"):msg['action'] = "###app"    
+								elif (document == "application/x-rar"):msg['action'] = "###rar_file"    
+								elif (document == "application/x-zip"):msg['action'] = "###zip_file"    
+								elif (document == "text/x-python"):msg['action'] = "###script_in_python"    
+								elif (document == "text/plain"):msg['action'] = "###text_file"    
+								elif (document == "application/x-shellscript"):msg['action'] = "###script_in_shell"    
+								elif (document == "text/x-lua"):msg['action'] = "###script_in_lua"    
+								elif (document == "text/html"):msg['action'] = "###script_in_HTML"    
+								elif (document == "application/json"):msg['action'] = "###script_in_JSON"    
+								elif (document == "application/javascript"):msg['action'] = "###script_in_JavaScript"    
+								elif (document == "application/octet-stream"):msg['action'] = "###script_in_octet-stream"    
+								elif (document == "text/markdown"):msg['action'] = "###script_in_Markdown"    
+								elif (document == "application/x-yaml"):msg['action'] = "###script_in_yaml."
+								else:msg['action'] = "###file"
 						elif ('entities' in msg):
-								if (msg['entities'][0]['type'] == "url"):											msg['action'] = '###url'
-								elif (msg['entities'][0]['type'] == "mention"):								msg['action'] = '###mention'
+								if (msg['entities'][0]['type'] == "url"):
+									msg['action'] = '###url'
+								elif (msg['entities'][0]['type'] == "mention"):
+									msg['action'] = '###mention'
 								elif (msg['entities'][0]['type'] == "bot_command"):
-																																							msg['action'] = '###bot_command'
-																																							msg['text'] = msg['text'].replace(
-																																								"@{}".format(config['USERNAMEBOT']),'')
+									msg['action'] = '###bot_command'
+									msg['text'] = msg['text'].replace("@{}".format(config['USERNAMEBOT']),'')
 						return msg_receive_(msg)
 					else: msg_receive_(msg)
